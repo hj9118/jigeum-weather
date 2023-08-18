@@ -1,11 +1,12 @@
-import './App.css';
+import './App.scss';
+import WeatherCard from './component/WeatherCard';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-     
+    <div>
+      <WeatherCard />
     </div>
   );
-}
+};
 
 export default App;
