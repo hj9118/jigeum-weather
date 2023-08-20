@@ -19,7 +19,7 @@ const WeatherIcon = (weather) => {
     case 'o1d':
       return <WiDaySunny />;
     case '01n':
-      return <WiNightClear size='25%' />;
+      return <WiNightClear />;
     case 'o2d':
       return <WiDaySunnyOvercast />;
     case '02n':
