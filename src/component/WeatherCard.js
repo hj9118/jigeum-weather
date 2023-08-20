@@ -1,21 +1,9 @@
 import { useEffect, useState } from 'react';
 import { BsSunrise, BsSunset } from 'react-icons/bs';
-import {
-  WiThermometer,
-  WiDaySunny,
-  WiDaySunnyOvercast,
-  WiCloud,
-  WiCloudy,
-  WiHail,
-  WiDayRain,
-  WiNightClear,
-  WiNightAltCloudy,
-  WiNightAltRain,
-  WiThunderstorm,
-  WiSnow,
-  WiDust,
-  WiNa,
-} from 'react-icons/wi';
+import { WiDust } from 'react-icons/wi';
+import WeatherIcon from './WeatherIcon';
+import { dust10, dust25 } from './DustStep';
+
 const WeatherCard = () => {
   const [weather, setWeather] = useState(null);
   const [air, setAir] = useState(null);
@@ -50,82 +38,6 @@ const WeatherCard = () => {
     return hour.substr(-2) + ':' + minute.substr(-2);
   };
 
-  const dust10 = (pm) => {
-    if (pm <= 20) {
-      return '아주 좋음';
-    } else if (pm <= 50) {
-      return '좋음';
-    } else if (pm <= 100) {
-      return '보통';
-    } else if (pm <= 200) {
-      return '나쁨';
-    }
-    return '매우 나쁨';
-  };
-
-  const dust25 = (pm) => {
-    if (pm <= 10) {
-      return '아주 좋음';
-    } else if (pm <= 25) {
-      return '좋음';
-    } else if (pm <= 50) {
-      return '보통';
-    } else if (pm <= 75) {
-      return '나쁨';
-    }
-    return '매우 나쁨';
-  };
-
-  const Icon = (weather) => {
-    switch (weather) {
-      case 'o1d':
-        return <WiDaySunny />;
-        break;
-      case '01n':
-        return <WiNightClear size='25%' />;
-        break;
-      case 'o2d':
-        return <WiDaySunnyOvercast />;
-        break;
-      case '02n':
-        return <WiNightAltCloudy />;
-        break;
-      case 'o3d':
-      case '03n':
-        return <WiCloud />;
-        break;
-      case 'o4d':
-      case '04n':
-        return <WiCloudy />;
-        break;
-      case 'o9d':
-      case '09n':
-        return <WiHail />;
-        break;
-      case '10d':
-        return <WiDayRain />;
-        break;
-      case '10n':
-        return <WiNightAltRain />;
-        break;
-      case '11d':
-      case '11n':
-        return <WiThunderstorm />;
-        break;
-      case '13d':
-      case '13n':
-        return <WiSnow />;
-        break;
-      case '50d':
-      case '50n':
-        return <WiDust />;
-        break;
-      default:
-        return <WiNa />;
-        break;
-    }
-  };
-
   return (
     <div className='weather-card'>
       <div className='container'>
@@ -134,7 +46,7 @@ const WeatherCard = () => {
         </div>
         <div className='half-two'>
           <h2 className='middle'>
-            {Icon(weather?.weather[0].icon)}
+            {WeatherIcon(weather?.weather[0].icon)}
             {parseInt(weather?.main.temp - 273.15, 10)}℃
           </h2>
         </div>
