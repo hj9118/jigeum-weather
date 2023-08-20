@@ -3,27 +3,27 @@ import { BsSunrise, BsSunset } from 'react-icons/bs';
 const WeatherCard = () => {
   const [weather, setWeather] = useState(null);
   const [air, setAir] = useState(null);
-  const getCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      getWeatherByCurrentLocation(lat, lon);
-    });
-  };
-
+  
   const getWeatherByCurrentLocation = async (lat, lon) => {
     let urlWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}`;
     let responseWeather = await fetch(urlWeather);
     let dataWeather = await responseWeather.json();
     setWeather(dataWeather);
-
+    
     let urlAir = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}`;
     let responseAir = await fetch(urlAir);
     let dataAir = await responseAir.json();
     setAir(dataAir);
   };
-
+  
   useEffect(() => {
+    const getCurrentLocation = () => {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        getWeatherByCurrentLocation(lat, lon);
+      });
+    };
     getCurrentLocation();
   }, []);
 
@@ -67,7 +67,7 @@ const WeatherCard = () => {
         </div>
         <div className='half-two'>
           <h2>
-            <img src={weatherIcon} className='middle' />
+            <img src={weatherIcon} className='middle' alt='날씨 아이콘' />
             {parseInt(weather?.main.temp - 273.15, 10)}℃
           </h2>
         </div>
