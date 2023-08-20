@@ -1,6 +1,21 @@
 import { useEffect, useState } from 'react';
 import { BsSunrise, BsSunset } from 'react-icons/bs';
-import { WiThermometer, WiDust } from 'react-icons/wi';
+import {
+  WiThermometer,
+  WiDaySunny,
+  WiDaySunnyOvercast,
+  WiCloud,
+  WiCloudy,
+  WiHail,
+  WiDayRain,
+  WiNightClear,
+  WiNightAltCloudy,
+  WiNightAltRain,
+  WiThunderstorm,
+  WiSnow,
+  WiDust,
+  WiNa,
+} from 'react-icons/wi';
 const WeatherCard = () => {
   const [weather, setWeather] = useState(null);
   const [air, setAir] = useState(null);
@@ -61,7 +76,56 @@ const WeatherCard = () => {
     return '매우 나쁨';
   };
 
-  const weatherIcon = `https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`;
+  const Icon = (weather) => {
+    switch (weather) {
+      case 'o1d':
+        return <WiDaySunny/>;
+        break;
+      case '01n':
+        return <WiNightClear size='25%' />;
+        break;
+      case 'o2d':
+        return <WiDaySunnyOvercast />;
+        break;
+      case '02n':
+        return <WiNightAltCloudy />;
+        break;
+      case 'o3d':
+      case '03n':
+        return <WiCloud />;
+        break;
+      case 'o4d':
+      case '04n':
+        return <WiCloudy />;
+        break;
+      case 'o9d':
+      case '09n':
+        return <WiHail />;
+        break;
+      case '10d':
+        return <WiDayRain />;
+        break;
+      case '10n':
+        return <WiNightAltRain />;
+        break;
+      case '11d':
+      case '11n':
+        return <WiThunderstorm />;
+        break;
+      case '13d':
+      case '13n':
+        return <WiSnow />;
+        break;
+      case '50d':
+      case '50n':
+        return <WiDust />;
+        break;
+      default:
+        return <WiNa />;
+        break;
+    }
+  };
+
   return (
     <div className='weather-card'>
       <div className='container'>
@@ -69,8 +133,8 @@ const WeatherCard = () => {
           <h1>{weather?.name}</h1>
         </div>
         <div className='half-two'>
-          <h2>
-            <img src={weatherIcon} className='middle' alt='날씨 아이콘' />
+          <h2 className='middle'>
+            {Icon(weather?.weather[0].icon)}
             {parseInt(weather?.main.temp - 273.15, 10)}℃
           </h2>
         </div>

@@ -29,7 +29,7 @@ html{
   box-shadow: 10px -2px 20px 2px rgb(240 240 240 / 30%);
   color: $light;
   background-color: $dark;
-  padding: 10px 20px;
+  padding: 5px 20px 30px 20px;
 }
 
 @media (prefers-color-scheme: dark){
@@ -45,7 +45,8 @@ html{
 }
 
 .middle {
-  vertical-align: middle;
+  display: flex;
+  align-items: center;
 }
 
 .center{
