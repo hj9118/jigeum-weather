@@ -144,13 +144,6 @@ const WeatherCard = () => {
         <div className='half-one'>
           <h3>체감온도: {parseInt(weather?.main.feels_like - 273.15, 10)}℃</h3>
         </div>
-        <div className='oneline'>
-          <h3 className='center'>
-            <WiThermometer />
-            {parseInt(weather?.main.temp_max - 273.15, 10)}℃ /{' '}
-            {parseInt(weather?.main.temp_min - 273.15, 10)}℃
-          </h3>
-        </div>
         <div className='quarter3'>
           <div>
             <WiDust size='40%' />
