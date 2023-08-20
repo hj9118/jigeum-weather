@@ -79,7 +79,7 @@ const WeatherCard = () => {
   const Icon = (weather) => {
     switch (weather) {
       case 'o1d':
-        return <WiDaySunny/>;
+        return <WiDaySunny />;
         break;
       case '01n':
         return <WiNightClear size='25%' />;
@@ -144,7 +144,7 @@ const WeatherCard = () => {
         <div className='half-one'>
           <h3>체감온도: {parseInt(weather?.main.feels_like - 273.15, 10)}℃</h3>
         </div>
-        <div className='quarter3'>
+        <div className='quarter1'>
           <div>
             <WiDust size='40%' />
             <h4>미세먼지</h4>
@@ -155,6 +155,8 @@ const WeatherCard = () => {
             <h4>초미세먼지</h4>
             <h4>{dust25(air?.list[0].components.pm2_5)}</h4>
           </div>
+        </div>
+        <div className='quarter3'>
           <div>
             <BsSunrise size='40%' />
             <h4>일출</h4>
