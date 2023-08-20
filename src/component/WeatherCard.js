@@ -22,19 +22,43 @@ const WeatherCard = () => {
     let dataAir = await responseAir.json();
     setAir(dataAir);
   };
-  
+
   useEffect(() => {
     getCurrentLocation();
   }, []);
 
   const Unix_timestamp = (t) => {
-    var date = new Date(t * 1000);
-    var hour = '0' + date.getHours();
-    var minute = '0' + date.getMinutes();
+    let date = new Date(t * 1000);
+    let hour = '0' + date.getHours();
+    let minute = '0' + date.getMinutes();
     return hour.substr(-2) + ':' + minute.substr(-2);
   };
 
-  const weatherIcon = `https://openweathermap.org/img/wn/${weather?.weather[0].icon}.png`;
+  const dust10 = (pm) => {
+    if(pm <= 20){
+      return '아주 좋음'
+    } else if (pm <= 50){
+      return '좋음'
+    } else if(pm <= 100){
+      return '보통'
+    } else if(pm <= 200){
+      return '나쁨'
+    } return '매우 나쁨'
+  }
+
+  const dust25 = (pm) => {
+    if(pm <= 10){
+      return '아주 좋음'
+    } else if (pm <= 25){
+      return '좋음'
+    } else if(pm <= 50){
+      return '보통'
+    } else if(pm <= 75){
+      return '나쁨'
+    } return '매우 나쁨'
+  }
+
+  const weatherIcon = `https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`;
   return (
     <div className='weather-card'>
       <div className='container'>
@@ -48,45 +72,31 @@ const WeatherCard = () => {
           </h2>
         </div>
         <div className='half-one'>
-          <span>습도: </span>
-          {weather?.main.humidity}%
+          <h3>습도: {weather?.main.humidity}%</h3>
         </div>
         <div className='half-one'>
-          <span>체감온도: </span>
-          {parseInt(weather?.main.feels_like - 273.15, 10)}℃
+          <h3>체감온도: {parseInt(weather?.main.feels_like - 273.15, 10)}℃</h3>
         </div>
         <div className='oneline'>
-          <div>🌫</div>
-          <div>미세먼지: {air?.list[0].components.pm10}</div>
-          <div>초미세먼지: {air?.list[0].components.pm2_5}</div>
+          <h4>🌡</h4>
+          <h4>최고 {parseInt(weather?.main.temp_max - 273.15, 10)}℃</h4>
+          <h4>최저 {parseInt(weather?.main.temp_min - 273.15, 10)}℃</h4>
         </div>
         <div className='oneline'>
-          <div>🌡</div>
-          <div>
-            <span>최고온도: </span>
-            {parseInt(weather?.main.temp_max - 273.15, 10)}℃
-          </div>
-          <div>
-            <span>최저온도: </span>
-            {parseInt(weather?.main.temp_min - 273.15, 10)}℃
-          </div>
-        </div>
-        <div className='quarter1'>
-          <p>풍향 및 풍속</p>
-          <p>
-            {weather?.wind.deg} / {weather?.wind.speed}
-          </p>
+          <h4>🌫</h4>
+          <h4>미세먼지 {dust10(air?.list[0].components.pm10)}</h4>
+          <h4>초미세먼지 {dust25(air?.list[0].components.pm2_5)}</h4>
         </div>
         <div className='quarter3'>
           <div>
             <BsSunrise size='40%' />
-            <p>일출</p>
-            <p>{Unix_timestamp(weather?.sys.sunrise)}</p>
+            <h4>일출</h4>
+            <h4>{Unix_timestamp(weather?.sys.sunrise)}</h4>
           </div>
           <div>
             <BsSunset size='40%' />
-            <p>일몰</p>
-            <p>{Unix_timestamp(weather?.sys.sunset)}</p>
+            <h4>일몰</h4>
+            <h4>{Unix_timestamp(weather?.sys.sunset)}</h4>
           </div>
         </div>
       </div>
