@@ -3,6 +3,7 @@ import { BsSunrise, BsSunset } from 'react-icons/bs';
 import { WiDust } from 'react-icons/wi';
 import WeatherIcon from './WeatherIcon';
 import { dust10, dust25 } from './DustStep';
+import { Unix_timestamp, kelToCel } from './Transform';
 
 const WeatherCard = () => {
   const [weather, setWeather] = useState(null);
@@ -30,13 +31,7 @@ const WeatherCard = () => {
     };
     getCurrentLocation();
   }, []);
-
-  const Unix_timestamp = (t) => {
-    let date = new Date(t * 1000);
-    let hour = '0' + date.getHours();
-    let minute = '0' + date.getMinutes();
-    return hour.substr(-2) + ':' + minute.substr(-2);
-  };
+  
 
   return (
     <div className='weather-card'>
@@ -47,14 +42,14 @@ const WeatherCard = () => {
         <div className='half-two'>
           <h2 className='middle'>
             {WeatherIcon(weather?.weather[0].icon)}
-            {parseInt(weather?.main.temp - 273.15, 10)}℃
+            {kelToCel(weather?.main.temp)}℃
           </h2>
         </div>
         <div className='half-one'>
           <h3>습도: {weather?.main.humidity}%</h3>
         </div>
         <div className='half-one'>
-          <h3>체감온도: {parseInt(weather?.main.feels_like - 273.15, 10)}℃</h3>
+          <h3>체감온도: {kelToCel(weather?.main.feels_like)}℃</h3>
         </div>
         <div className='quarter1'>
           <div>
