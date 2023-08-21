@@ -16,21 +16,21 @@ import {
 
 const WeatherIcon = (weather) => {
   switch (weather) {
-    case 'o1d':
+    case '01d':
       return <WiDaySunny />;
     case '01n':
       return <WiNightClear />;
-    case 'o2d':
+    case '02d':
       return <WiDaySunnyOvercast />;
     case '02n':
       return <WiNightAltCloudy />;
-    case 'o3d':
+    case '03d':
     case '03n':
       return <WiCloud />;
-    case 'o4d':
+    case '04d':
     case '04n':
       return <WiCloudy />;
-    case 'o9d':
+    case '09d':
     case '09n':
       return <WiHail />;
     case '10d':
