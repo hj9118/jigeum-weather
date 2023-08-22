@@ -3,12 +3,13 @@ import { BsSunrise, BsSunset } from 'react-icons/bs';
 import { WiDust } from 'react-icons/wi';
 import WeatherIcon from './WeatherIcon';
 import { dust10, dust25 } from './DustStep';
-import { Unix_timestamp, kelToCel } from './Transform';
+import { Unix_timestamp, cityName, kelToCel } from './Transform';
 import { FadeLoader } from 'react-spinners';
 
 const WeatherCard = () => {
   const [weather, setWeather] = useState(null);
   const [air, setAir] = useState(null);
+  const [city, setCity] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
@@ -22,6 +23,12 @@ const WeatherCard = () => {
     let responseAir = await fetch(urlAir);
     let dataAir = await responseAir.json();
     setAir(dataAir);
+
+    let urlCity = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}`;
+    let responseCity = await fetch(urlCity);
+    let dataCity = await responseCity.json();
+    setCity(dataCity[0].local_names.ko);
+
     setIsLoading(false);
   };
 
@@ -34,7 +41,7 @@ const WeatherCard = () => {
       });
     };
     getCurrentLocation();
-  }, []);
+  }, [city]);
 
   return (
     <div>
@@ -46,7 +53,11 @@ const WeatherCard = () => {
         <div className='weather-card'>
           <div className='container'>
             <div className='city'>
-              <h1>{weather?.name ? `${weather?.name}` : '-'}</h1>
+              <h1>
+                {city
+                  ? cityName(city)
+                  : '-'}
+              </h1>
             </div>
             <div className='half-two'>
               <h2 className='middle'>

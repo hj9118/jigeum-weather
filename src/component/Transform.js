@@ -8,3 +8,7 @@ export const Unix_timestamp = (t) => {
 export const kelToCel = (t) => {
   return parseInt(t - 273.15, 10);
 };
+
+export const cityName = (s) => {
+  return s.length === 2 ? s : s.slice(0, -1);
+}
