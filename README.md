@@ -43,3 +43,12 @@ src
 `Current Weather Data`, `Air Pollution API`, `Geocoding API` 사용
 - Geolocation API
 `getCurrentPosition()`을 통해 기기 좌표 반환
+
+## 제작과정
+[1. 디자인과 구현](https://mexocoxon.tistory.com/315)</br>
+[2. 배포 및 수정](https://mexocoxon.tistory.com/316)</br>
+[3. 성능체크와 번역](https://mexocoxon.tistory.com/322)</br>
+
+[에러노트 - 쓰이지 않는 코드는 배포에 도움되지 않는다 : Unreachable code ](https://mexocoxon.tistory.com/319)</br>
+[에러노트 - null값을 의심하고 의심하고 또 의심하라 : Cannot read properties of null](https://mexocoxon.tistory.com/324)</br>
+[에러노트 - useEffect는 어떻게 값을 처리하길래 : React Hook useEffect has a missing dependency](https://mexocoxon.tistory.com/323)
